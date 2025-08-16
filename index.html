@@ -1,256 +1,126 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vườn Rau Vui Vẻ - Mini Game Rau Hữu Cơ</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Baloo 2 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥕</text></svg>">
+import React from 'react';
+import {
+  Search, Home, Folder, Layers, Plus, ArrowRight
+} from 'lucide-react';
 
-    <style>
-        /* Áp dụng font chữ và cài đặt cơ bản */
-        body {
-            font-family: 'Baloo 2', cursive;
-            overflow-x: hidden; /* Ngăn cuộn ngang */
-        }
+// Giả lập dữ liệu cho các mẫu thiết kế gần đây
+const recentDesigns = [
+  { id: 1, title: 'Báo cáo bán hàng', date: 'Đã sửa 5 phút trước', thumbnailColor: '#fecaca' },
+  { id: 2, title: 'Thuyết trình dự án', date: 'Đã sửa 1 ngày trước', thumbnailColor: '#d1d5db' },
+  { id: 3, title: 'Tờ rơi quảng cáo', date: 'Đã sửa 3 ngày trước', thumbnailColor: '#a7f3d0' },
+  { id: 4, title: 'Bài đăng mạng xã hội', date: 'Đã sửa 1 tuần trước', thumbnailColor: '#bfdbfe' },
+];
 
-        /* --- KEYFRAMES CHO ANIMATION --- */
+// Giả lập dữ liệu cho các danh mục mockup với hình ảnh placeholder
+const designCategories = [
+  { title: 'Hộp Mockups', count: 1230, imageUrl: 'https://placehold.co/150x100/e2e8f0/000?text=Hộp+Mockups' },
+  { title: 'T-shirt Mockups', count: 44, imageUrl: 'https://placehold.co/150x100/e2e8f0/000?text=Áo+phông' },
+  { title: 'Túi / Túi Mockups', count: 766, imageUrl: 'https://placehold.co/150x100/e2e8f0/000?text=Túi+vải' },
+  { title: 'Sách Mockups', count: 110, imageUrl: 'https://placehold.co/150x100/e2e8f0/000?text=Sách' },
+  { title: 'Chai Mockups', count: 1594, imageUrl: 'https://placehold.co/150x100/e2e8f0/000?text=Chai' },
+  { title: 'Có thể Mockups', count: 654, imageUrl: 'https://placehold.co/150x100/e2e8f0/000?text=Lọ' },
+  { title: 'Ống Mockups', count: 99, imageUrl: 'https://placehold.co/150x100/e2e8f0/000?text=Ống' },
+  { title: 'Cốc / Hộp đựng Mockups', count: 306, imageUrl: 'https://placehold.co/150x100/e2e8f0/000?text=Cốc' },
+];
 
-        /* Animation "thở" cho nút và nhân vật chính */
-        @keyframes breathing {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+// Thành phần chính của trang chủ
+const App = () => {
+  return (
+    <div className="flex min-h-screen bg-gray-100 font-sans antialiased text-gray-800">
+      
+      {/* Thanh điều hướng bên trái (Sidebar) */}
+      <aside className="w-20 bg-white shadow-lg flex flex-col items-center py-6 space-y-4">
+        <div className="p-2 bg-blue-600 rounded-lg shadow-lg">
+          <img src="https://placehold.co/28x28/ffffff/000?text=M" alt="Logo" />
+        </div>
+        <nav className="flex flex-col items-center space-y-4 w-full mt-8">
+          <button className="p-3 rounded-xl hover:bg-gray-200 transition-colors duration-200 w-16">
+            <Home className="mx-auto text-blue-600" size={24} />
+            <span className="text-xs mt-1 text-gray-600">Trang chủ</span>
+          </button>
+          <button className="p-3 rounded-xl hover:bg-gray-200 transition-colors duration-200 w-16">
+            <Folder className="mx-auto text-gray-500" size={24} />
+            <span className="text-xs mt-1 text-gray-600">Dự án</span>
+          </button>
+          <button className="p-3 rounded-xl hover:bg-gray-200 transition-colors duration-200 w-16">
+            <Layers className="mx-auto text-gray-500" size={24} />
+            <span className="text-xs mt-1 text-gray-600">Mẫu</span>
+          </button>
+        </nav>
+      </aside>
+
+      {/* Khu vực nội dung chính */}
+      <main className="flex-1 p-8 overflow-y-auto">
         
-        /* Animation "nhảy" vào cho các icon rau củ */
-        @keyframes pop-in {
-            0% { opacity: 0; transform: scale(0.5) translateY(50px); }
-            70% { opacity: 1; transform: scale(1.1) translateY(-10px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        
-        /* Animation cho các phần tử xuất hiện khi cuộn trang */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- HIỆU ỨNG THẺ 3D --- */
-        .perspective-container {
-            perspective: 1000px;
-        }
-        .card-3d {
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            transform-style: preserve-3d;
-        }
-        .perspective-container:hover .card-3d {
-            transform: rotateY(10deg) rotateX(5deg) scale(1.05);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        }
-
-        /* Nút bấm chính */
-        .main-button {
-            animation: breathing 2.5s ease-in-out infinite;
-            transition: all 0.3s ease;
-        }
-        .main-button:hover {
-            animation-play-state: paused; /* Tạm dừng animation khi di chuột */
-            transform: scale(1.1);
-        }
-
-        /* Icon rau củ ở banner */
-        .veggie-icon {
-            opacity: 0;
-            animation: pop-in 0.8s ease-out forwards;
-        }
-
-        /* Họa tiết trang trí cho hiệu ứng Parallax */
-        .parallax-shape {
-            position: absolute;
-            opacity: 0.15;
-            z-index: 0;
-            transition: transform 0.2s linear;
-        }
-    </style>
-</head>
-<body class="bg-emerald-50 text-gray-800 relative">
-
-    <!-- Họa tiết trang trí cho hiệu ứng Parallax -->
-    <div data-speed="0.5" class="parallax-shape w-32 h-32 bg-yellow-400 rounded-full -top-16 left-10"></div>
-    <div data-speed="-0.3" class="parallax-shape w-48 h-48 bg-blue-300 rounded-2xl top-1/4 -right-20 transform rotate-45"></div>
-    <div data-speed="0.2" class="parallax-shape w-24 h-24 bg-orange-400 rounded-full top-2/3 -left-12"></div>
-    <div data-speed="-0.1" class="parallax-shape w-40 h-40 bg-green-300 rounded-full bottom-10 right-10"></div>
-
-    <!-- Container chính -->
-    <div class="container mx-auto p-4 md:p-8 max-w-5xl relative z-10">
-
-        <!-- Header: Logo và Tiêu đề -->
-        <header class="text-center mb-8 md:mb-12">
-            <div class="flex items-center justify-center gap-4 animate-on-scroll">
-                <!-- SVG Logo Củ Cà Rốt với animation -->
-                <svg class="w-16 h-16 text-orange-500" style="animation: breathing 3s ease-in-out infinite alternate;" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5 12.0001C19.5 12.0001 16.5 16.5001 12 16.5001C7.5 16.5001 4.5 12.0001 4.5 12.0001C4.5 12.0001 7.5 7.50006 12 7.50006C16.5 7.50006 19.5 12.0001 19.5 12.0001ZM12 14.2501C13.2426 14.2501 14.25 13.2427 14.25 12.0001C14.25 10.7574 13.2426 9.75006 12 9.75006C10.7574 9.75006 9.75 10.7574 9.75 12.0001C9.75 13.2427 10.7574 14.2501 12 14.2501Z" fill="#22c55e"/>
-                    <path d="M16.5 3H7.5L9 5.25H15L16.5 3Z" fill="#22c55e"/>
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C15.1876 21 17.4377 18.6602 18 16H6C6.56228 18.6602 8.81244 21 12 21Z" fill="#f97316"/>
-                    <path d="M17.625 15C18.375 12.75 16.5 9 12 9C7.5 9 5.625 12.75 6.375 15H17.625Z" fill="#fb923c"/>
-                    <path d="M9.5 11.5C10.0523 11.5 10.5 11.0523 10.5 10.5C10.5 9.94772 10.0523 9.5 9.5 9.5C8.94772 9.5 8.5 9.94772 8.5 10.5C8.5 11.0523 8.94772 11.5 9.5 11.5Z" fill="#ffffff"/>
-                    <path d="M14.5 11.5C15.0523 11.5 15.5 11.0523 15.5 10.5C15.5 9.94772 15.0523 9.5 14.5 9.5C13.9477 9.5 13.5 9.94772 13.5 10.5C13.5 11.0523 13.9477 11.5 14.5 11.5Z" fill="#ffffff"/>
-                    <path d="M9 13.5C9 12.6716 9.67157 12 10.5 12H13.5C14.3284 12 15 12.6716 15 13.5C15 13.5 14 14.5 12 14.5C10 14.5 9 13.5 9 13.5Z" fill="#ffffff"/>
-                </svg>
-                <h1 class="text-4xl md:text-6xl font-extrabold text-green-600">Vườn Rau Vui Vẻ</h1>
+        {/* Thanh tìm kiếm và tiêu đề trên cùng */}
+        <div className="flex justify-between items-center mb-12">
+          <div className="flex-1 max-w-2xl">
+            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-2">Bạn muốn thiết kế gì?</h1>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Tìm kiếm trong hàng triệu mẫu"
+                className="w-full pl-12 pr-4 py-3 rounded-full bg-white shadow-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             </div>
-            <p class="text-lg md:text-2xl mt-4 text-gray-600 animate-on-scroll" style="transition-delay: 100ms;">Cùng bé khám phá thế giới rau củ hữu cơ kỳ diệu!</p>
-        </header>
+          </div>
+          <button className="flex items-center space-x-2 bg-purple-100 text-purple-700 font-bold px-6 py-3 rounded-full shadow-md hover:bg-purple-200 transition-colors">
+            <Plus size={20} />
+            <span>Nâng cấp gói đăng ký</span>
+          </button>
+        </div>
 
-        <!-- Hero Section: Banner chính và nút chơi game -->
-        <section class="bg-white rounded-3xl p-6 md:p-10 shadow-xl text-center overflow-hidden animate-on-scroll">
-            <div class="relative z-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-yellow-500 mb-4">Bé Đã Sẵn Sàng Trồng Cây Chưa?</h2>
-                <p class="text-gray-500 max-w-2xl mx-auto mb-8">
-                    Một trò chơi đơn giản và thú vị, giúp bé học cách gieo hạt, tưới nước và thu hoạch những loại rau củ sạch ngon cho cả gia đình.
-                </p>
-                <button class="main-button bg-orange-500 text-white font-bold text-xl md:text-2xl py-4 px-10 rounded-full shadow-lg hover:bg-orange-600">
-                    🌱 Chơi Ngay!
-                </button>
-                <div class="mt-8 flex justify-center items-end gap-4 h-24">
-                    <!-- Các icon rau củ ngộ nghĩnh với animation pop-in -->
-                    <span class="text-6xl veggie-icon" style="animation-delay: 0.2s;">🥦</span>
-                    <span class="text-8xl veggie-icon" style="animation-delay: 0.3s;">🍅</span>
-                    <span class="text-6xl veggie-icon" style="animation-delay: 0.4s;">🌽</span>
-                    <span class="text-7xl veggie-icon" style="animation-delay: 0.5s;">🍆</span>
+        {/* Danh mục Mockup */}
+        <section className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+            <ArrowRight className="text-gray-500 mr-2" /> Các danh mục mockup hàng đầu
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+            {designCategories.map((category, index) => (
+              <div 
+                key={index}
+                className="bg-white rounded-2xl shadow-md overflow-hidden transition-all duration-200 ease-in-out cursor-pointer hover:scale-105 hover:shadow-xl"
+              >
+                <img src={category.imageUrl} alt={category.title} className="w-full h-auto object-cover" />
+                <div className="p-4 relative">
+                  <h3 className="font-semibold text-lg text-gray-900 leading-tight">{category.title}</h3>
+                  <p className="text-sm text-gray-500 mt-1">{category.count}</p>
+                  <div className="absolute top-4 right-4 p-2 rounded-full bg-blue-100 text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowRight size={20} />
+                  </div>
                 </div>
-            </div>
+              </div>
+            ))}
+          </div>
         </section>
 
-        <!-- Section: Trò chơi có gì vui? -->
-        <section class="mt-12 md:mt-20">
-            <h2 class="text-center text-3xl md:text-4xl font-bold text-green-600 mb-10 animate-on-scroll">Trò Chơi Có Gì Vui?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Card 1: Gieo Trồng với hiệu ứng 3D -->
-                <div class="perspective-container animate-on-scroll" style="transition-delay: 100ms;">
-                    <div class="card-3d bg-white rounded-2xl p-6 text-center shadow-lg">
-                        <div class="text-6xl mb-4">🌱</div>
-                        <h3 class="text-2xl font-bold text-yellow-600 mb-2">Tự Tay Gieo Trồng</h3>
-                        <p class="text-gray-500">Bé sẽ được chọn những hạt giống mình yêu thích và gieo xuống đất.</p>
-                    </div>
+        {/* Thiết kế gần đây */}
+        <section>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Thiết kế gần đây</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {recentDesigns.map(design => (
+              <div 
+                key={design.id}
+                className="bg-white rounded-xl shadow-md overflow-hidden cursor-pointer hover:shadow-xl transition-shadow duration-200"
+              >
+                <div 
+                  className="w-full h-40" 
+                  style={{ backgroundColor: design.thumbnailColor }}
+                ></div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg text-gray-900 truncate">{design.title}</h3>
+                  <p className="text-sm text-gray-500 mt-1">{design.date}</p>
                 </div>
-                <!-- Card 2: Chăm Sóc với hiệu ứng 3D -->
-                <div class="perspective-container animate-on-scroll" style="transition-delay: 200ms;">
-                     <div class="card-3d bg-white rounded-2xl p-6 text-center shadow-lg">
-                        <div class="text-6xl mb-4">💧</div>
-                        <h3 class="text-2xl font-bold text-blue-500 mb-2">Chăm Sóc Mỗi Ngày</h3>
-                        <p class="text-gray-500">Đừng quên tưới nước và bắt sâu để cây lớn nhanh và khỏe mạnh nhé!</p>
-                    </div>
-                </div>
-                <!-- Card 3: Thu Hoạch với hiệu ứng 3D -->
-                <div class="perspective-container animate-on-scroll" style="transition-delay: 300ms;">
-                    <div class="card-3d bg-white rounded-2xl p-6 text-center shadow-lg">
-                        <div class="text-6xl mb-4">🧺</div>
-                        <h3 class="text-2xl font-bold text-red-500 mb-2">Thu Hoạch Thành Quả</h3>
-                        <p class="text-gray-500">Wow! Rau củ đã chín rồi, cùng thu hoạch và lấp đầy giỏ hàng nào!</p>
-                    </div>
-                </div>
-            </div>
+              </div>
+            ))}
+          </div>
         </section>
 
-        <!-- Section: Vì sao chọn rau hữu cơ? -->
-        <section class="mt-12 md:mt-20 bg-green-100/50 rounded-3xl p-6 md:p-10 shadow-inner animate-on-scroll">
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <!-- Hình ảnh minh họa -->
-                <div class="text-center">
-                    <img src="https://placehold.co/400x300/A7F3D0/166534?text=Gia+đình+vui+vẻ" alt="Gia đình hạnh phúc bên vườn rau" class="rounded-2xl mx-auto shadow-md transform hover:scale-105 transition-transform duration-500">
-                </div>
-                <!-- Nội dung lợi ích -->
-                <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-green-700 mb-4">Vì Sao Bố Mẹ Nên Chọn Rau Hữu Cơ?</h2>
-                    <p class="text-gray-600 mb-6">Rau hữu cơ không chỉ ngon mà còn là món quà sức khỏe tuyệt vời nhất cho các bé yêu.</p>
-                    <ul class="space-y-4">
-                        <li class="flex items-start">
-                            <span class="text-green-500 text-2xl mr-3">✅</span>
-                            <span class="text-gray-700"><strong>An toàn tuyệt đối:</strong> Không thuốc trừ sâu, không hóa chất độc hại.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 text-2xl mr-3">✅</span>
-                            <span class="text-gray-700"><strong>Giàu dinh dưỡng:</strong> Trồng tự nhiên giúp giữ trọn vẹn vitamin và khoáng chất.</span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-green-500 text-2xl mr-3">✅</span>
-                             <span class="text-gray-700"><strong>Hương vị thơm ngon:</strong> Vị ngọt tự nhiên, giúp bé ăn ngon miệng hơn.</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Footer -->
-        <footer class="text-center mt-12 md:mt-20 pt-8 border-t border-gray-200">
-            <p class="text-gray-500 animate-on-scroll">Một sản phẩm được tạo ra với tình yêu thương 💚</p>
-            <p class="text-sm text-gray-400 mt-2 animate-on-scroll" style="transition-delay: 100ms;">&copy; 2024 Vườn Rau Vui Vẻ. All rights reserved.</p>
-        </footer>
-
+      </main>
+      
     </div>
-    
-    <script>
-        // --- SCRIPT CHO HIỆU ỨNG KHI CUỘN TRANG (SCROLL ANIMATION) ---
-        const scrollElements = document.querySelectorAll(".animate-on-scroll");
+  );
+};
 
-        const elementInView = (el, dividend = 1) => {
-            const elementTop = el.getBoundingClientRect().top;
-            return (
-                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
-            );
-        };
-
-        const displayScrollElement = (element) => {
-            element.classList.add("is-visible");
-        };
-
-        const handleScrollAnimation = () => {
-            scrollElements.forEach((el) => {
-                if (elementInView(el, 1.25)) {
-                    displayScrollElement(el);
-                }
-            });
-        };
-        
-        // --- SCRIPT CHO HIỆU ỨNG PARALLAX ---
-        const parallaxElements = document.querySelectorAll('.parallax-shape');
-
-        const handleParallax = () => {
-            const yOffset = window.pageYOffset;
-            parallaxElements.forEach(el => {
-                const speed = parseFloat(el.getAttribute('data-speed'));
-                // Dùng transform để di chuyển, mượt hơn là top/left
-                el.style.transform = `translateY(${yOffset * speed}px)`;
-            });
-        };
-
-        // --- GẮN SỰ KIỆN ---
-        window.addEventListener("scroll", () => {
-            handleScrollAnimation();
-            handleParallax();
-        });
-
-        // Kích hoạt animation cho các phần tử đã hiển thị sẵn khi tải trang
-        document.addEventListener('DOMContentLoaded', () => {
-            handleScrollAnimation();
-            handleParallax();
-        });
-    </script>
-</body>
-</html>
+export default App;
