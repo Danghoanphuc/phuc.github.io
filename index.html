@@ -90,11 +90,13 @@
       background: #dc2626;
       color: #fff;
     }
-    .showcase img {
-      max-height: 300px;
+    .mockup-frame {
+      width: 100%;
+      max-width: 500px;
+      height: 500px;
+      border: none;
       border-radius: 20px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: 0.5s;
     }
     .why {
       text-align: center;
@@ -150,12 +152,12 @@
   <section class="showcase">
     <h2>Trải nghiệm bao bì Trà Sữa theo mùa</h2>
     <div class="tabs">
-      <button class="tab-btn active" data-img="noel">Noel</button>
-      <button class="tab-btn" data-img="tet">Tết</button>
-      <button class="tab-btn" data-img="valentine">Valentine</button>
-      <button class="tab-btn" data-img="summer">Summer</button>
+      <button class="tab-btn active" data-src="https://www.pacdora.com/share?filter_url=psj7a72i7h">Noel</button>
+      <button class="tab-btn" data-src="https://www.pacdora.com/share?filter_url=psj7a72i7h">Tết</button>
+      <button class="tab-btn" data-src="https://www.pacdora.com/share?filter_url=psj7a72i7h">Valentine</button>
+      <button class="tab-btn" data-src="https://www.pacdora.com/share?filter_url=psj7a72i7h">Summer</button>
     </div>
-   <iframe title="" allowfullscreen style="border:none;" width="500" height="500" src="https://www.pacdora.com/share?filter_url=psj7a72i7h" ></iframe>
+    <iframe id="mockupFrame" class="mockup-frame" allowfullscreen src="https://www.pacdora.com/share?filter_url=psj7a72i7h"></iframe>
   </section>
 
   <!-- Why -->
@@ -171,19 +173,14 @@
   </section>
 
   <script>
-    const mockup = document.getElementById('mockup');
+    const frame = document.getElementById('mockupFrame');
     const buttons = document.querySelectorAll('.tab-btn');
-    const images = {
-      noel: "https://via.placeholder.com/400x300?text=Noel+Mockup",
-      tet: "https://via.placeholder.com/400x300?text=Tet+Mockup",
-      valentine: "https://via.placeholder.com/400x300?text=Valentine+Mockup",
-      summer: "https://via.placeholder.com/400x300?text=Summer+Mockup"
-    };
+
     buttons.forEach(btn => {
       btn.addEventListener('click', () => {
         buttons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        mockup.src = images[btn.dataset.img];
+        frame.src = btn.dataset.src;
       });
     });
   </script>
