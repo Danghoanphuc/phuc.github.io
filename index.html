@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PrintZ - Thiết kế & In ấn Bao bì F&B</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrintZ – Nền tảng Quản lý & Triển khai Thương hiệu F&B</title>
   <style>
     body {
       margin: 0;
@@ -12,177 +12,170 @@
       color: #333;
     }
     header {
-      text-align: center;
-      padding: 80px 20px;
-      background: linear-gradient(180deg, #dc2626, #ef4444);
+      background: #dc2626;
       color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     header h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+      font-size: 1.4rem;
+      margin: 0;
     }
-    header p {
+    header nav a {
+      color: #fff;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: #fef2f2;
+    }
+    .hero h2 {
+      font-size: 2rem;
+      color: #dc2626;
+      margin-bottom: 15px;
+    }
+    .hero p {
       font-size: 1.2rem;
-      margin-bottom: 30px;
+      max-width: 600px;
+      margin: 0 auto;
     }
     .btn {
-      background: #fff;
-      color: #dc2626;
-      padding: 12px 24px;
-      border-radius: 30px;
-      font-weight: bold;
-      text-decoration: none;
       display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #dc2626;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
       transition: 0.3s;
     }
     .btn:hover {
-      background: #f3f3f3;
+      background: #b91c1c;
     }
-    .services {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+    .section {
       padding: 60px 20px;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: auto;
+    }
+    .section h2 {
+      color: #dc2626;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
     .card {
       background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      padding: 30px;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       text-align: center;
-      transition: 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
     }
     .card h3 {
+      color: #dc2626;
       margin-bottom: 10px;
-      font-size: 1.2rem;
-      color: #dc2626;
     }
-    .showcase {
-      background: #f9fafb;
-      text-align: center;
-      padding: 80px 20px;
-    }
-    .showcase h2 {
-      color: #dc2626;
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    .tabs {
-      margin-bottom: 20px;
-    }
-    .tabs button {
-      border: 1px solid #dc2626;
-      background: #fff;
-      color: #dc2626;
-      padding: 8px 16px;
-      margin: 0 5px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .tabs button.active, .tabs button:hover {
-      background: #dc2626;
-      color: #fff;
-    }
-    .mockup-frame {
+    iframe, img {
       width: 100%;
-      max-width: 500px;
-      height: 500px;
       border: none;
-      border-radius: 20px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      margin-top: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    .why {
+    footer {
       text-align: center;
-      padding: 60px 20px;
-      background: #f9fafb;
-    }
-    .why h2 {
-      font-size: 2rem;
-      color: #dc2626;
-      margin-bottom: 20px;
-    }
-    .cta {
-      text-align: center;
-      padding: 60px 20px;
-      background: #dc2626;
-      color: #fff;
-    }
-    .cta h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
+      padding: 30px;
+      background: #f3f4f6;
+      color: #555;
     }
   </style>
 </head>
 <body>
-
-  <!-- Hero -->
+  <!-- Header -->
   <header>
-    <h1>PrintZ – Giải pháp Thiết kế & In ấn Bao bì cho F&B</h1>
-    <p>Dành riêng cho tiệm bánh, trà sữa và cà phê.<br/>Đồng bộ thương hiệu – Đổi mới theo mùa – Tiết kiệm chi phí.</p>
-    <a href="#contact" class="btn">Nhận tư vấn miễn phí</a>
+    <h1>PrintZ</h1>
+    <nav>
+      <a href="#solutions">Giải pháp</a>
+      <a href="#demo">Demo</a>
+      <a href="#process">Quy trình</a>
+      <a href="#contact">Liên hệ</a>
+    </nav>
   </header>
 
-  <!-- Services -->
-  <section class="services">
-    <div class="card">
-      <h3>🍰 Bao bì Tiệm Bánh</h3>
-      <p>Hộp quà sang trọng, túi giấy, tem dán lễ hội giúp nâng giá trị sản phẩm.</p>
-      <a href="#" class="btn">Xem chi tiết</a>
-    </div>
-    <div class="card">
-      <h3>🥤 Bao bì Trà Sữa</h3>
-      <p>Ly giấy, túi xách, sticker theo trend – thu hút giới trẻ, dễ viral.</p>
-      <a href="#" class="btn">Xem chi tiết</a>
-    </div>
-    <div class="card">
-      <h3>☕ Bao bì Cà Phê</h3>
-      <p>Ly take-away, túi giấy, bao cà phê hạt đồng bộ – xây dựng thương hiệu chuyên nghiệp.</p>
-      <a href="#" class="btn">Xem chi tiết</a>
+  <!-- Hero -->
+  <section class="hero">
+    <h2>Nền tảng Quản lý & Triển khai Thương hiệu F&B</h2>
+    <p>PrintZ giúp tiệm cà phê, tiệm bánh và trà sữa luôn bắt trend với bao bì, chiến dịch và decor sự kiện – đồng bộ, nhanh chóng, tiết kiệm chi phí.</p>
+    <a href="#contact" class="btn">Trải nghiệm ngay</a>
+  </section>
+
+  <!-- Giải pháp -->
+  <section class="section" id="solutions">
+    <h2>Giải pháp cho từng mô hình F&B</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Tiệm Cà Phê</h3>
+        <p>Ly cà phê mang đi, túi giấy, bao bì seasonal thiết kế đồng bộ với thương hiệu.</p>
+      </div>
+      <div class="card">
+        <h3>Tiệm Bánh</h3>
+        <p>Hộp bánh, nhãn dán, túi xách thay đổi theo mùa lễ hội, tạo trải nghiệm khách hàng mới lạ.</p>
+      </div>
+      <div class="card">
+        <h3>Tiệm Trà Sữa</h3>
+        <p>Mockup bao bì dynamic, luôn cập nhật xu hướng và sự kiện đặc biệt.</p>
+      </div>
     </div>
   </section>
 
-  <!-- Showcase -->
-  <section class="showcase">
-    <h2>Trải nghiệm bao bì Trà Sữa theo mùa</h2>
-    <div class="tabs">
-      <button class="tab-btn active" data-src="https://www.pacdora.com/share?filter_url=psj7a72i7h">Noel</button>
-      <button class="tab-btn" data-src="https://www.pacdora.com/share?filter_url=psj7a72i7h">Tết</button>
-      <button class="tab-btn" data-src="https://www.pacdora.com/share?filter_url=psj7a72i7h">Valentine</button>
-      <button class="tab-btn" data-src="https://www.pacdora.com/share?filter_url=psj7a72i7h">Summer</button>
+  <!-- Demo -->
+  <section class="section" id="demo">
+    <h2>Demo Mockup Bao Bì</h2>
+    <iframe title="Mockup trà sữa" allowfullscreen src="https://www.pacdora.com/share?filter_url=psj7a72i7h" height="500"></iframe>
+  </section>
+
+  <!-- Process -->
+  <section class="section" id="process">
+    <h2>Quy trình triển khai PrintZ</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Thiết kế</h3>
+        <p>Đội ngũ sáng tạo thiết kế bao bì & campaign đồng bộ thương hiệu.</p>
+      </div>
+      <div class="card">
+        <h3>2. In ấn</h3>
+        <p>Đảm bảo chất lượng, tối ưu chi phí và tốc độ.</p>
+      </div>
+      <div class="card">
+        <h3>3. Campaign</h3>
+        <p>Quản lý lịch trình sự kiện, bao bì theo mùa & chiến dịch marketing.</p>
+      </div>
+      <div class="card">
+        <h3>4. Decor</h3>
+        <p>Đề xuất trang trí cửa hàng theo mùa lễ hội, tạo sự khác biệt.</p>
+      </div>
     </div>
-    <iframe id="mockupFrame" class="mockup-frame" allowfullscreen src="https://www.pacdora.com/share?filter_url=psj7a72i7h"></iframe>
   </section>
 
-  <!-- Why -->
-  <section class="why">
-    <h2>Vì sao chọn PrintZ?</h2>
-    <p>Chúng tôi mang đến giải pháp thiết kế – in ấn bao bì theo gói định kỳ, luôn mới mẻ theo mùa lễ hội, trend, sự kiện…<br/>Giúp thương hiệu của bạn nổi bật và tiết kiệm chi phí.</p>
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <h2>Liên hệ PrintZ</h2>
+    <p style="text-align:center;">Địa chỉ: Hà Nội, Việt Nam<br>Email: contact@printz.vn<br>Hotline: 0123 456 789</p>
+    <p style="text-align:center;"><a class="btn" href="mailto:contact@printz.vn">Gửi yêu cầu</a></p>
   </section>
 
-  <!-- CTA -->
-  <section class="cta" id="contact">
-    <h2>Sẵn sàng thay đổi diện mạo thương hiệu của bạn?</h2>
-    <a href="#" class="btn">Liên hệ ngay với PrintZ</a>
-  </section>
-
-  <script>
-    const frame = document.getElementById('mockupFrame');
-    const buttons = document.querySelectorAll('.tab-btn');
-
-    buttons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        buttons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        frame.src = btn.dataset.src;
-      });
-    });
-  </script>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 PrintZ – Nền tảng Quản lý & Triển khai Thương hiệu F&B</p>
+  </footer>
 </body>
 </html>
