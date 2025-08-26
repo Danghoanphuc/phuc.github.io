@@ -1,266 +1,116 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Cake, CupSoda, Coffee, ChevronRight } from 'lucide-react';
-
-// Component UI tái sử dụng (Mô phỏng shadcn/ui)
-// =================================================================
-
-const Button = ({ children, variant = 'primary', className = '', ...props }) => {
-  const baseClasses = 'inline-flex items-center justify-center px-6 py-3 font-semibold rounded-2xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
-  
-  const variants = {
-    primary: 'bg-white text-red-600 shadow-md hover:bg-gray-100 hover:shadow-lg focus:ring-red-500',
-    secondary: 'bg-red-600 text-white hover:bg-red-700 focus:ring-red-500',
-    ghost: 'bg-transparent text-red-600 hover:bg-red-100',
-  };
-
-  return (
-    <button className={`${baseClasses} ${variants[variant]} ${className}`} {...props}>
-      {children}
-    </button>
-  );
-};
-
-const Card = ({ children, className = '' }) => {
-  return (
-    <div className={`bg-white rounded-2xl shadow-lg overflow-hidden transition-shadow duration-300 hover:shadow-2xl ${className}`}>
-      {children}
-    </div>
-  );
-};
-
-// Các Section của trang
-// =================================================================
-
-const HeroSection = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: -50 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        type: 'spring',
-        damping: 15,
-        stiffness: 100,
-      }
-    },
-  };
-
-  return (
-    <section className="relative w-full min-h-screen flex items-center justify-center text-center text-white bg-gradient-to-br from-red-800 to-red-600 p-4 overflow-hidden">
-      <motion.div
-        className="z-10 flex flex-col items-center"
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
-        <motion.h1 
-          className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight mb-4"
-          variants={itemVariants}
-        >
-          PrintZ: In ấn Sáng tạo, Đồng bộ Thương hiệu
-        </motion.h1>
-        <motion.p 
-          className="max-w-2xl text-lg md:text-xl text-red-100 mb-8"
-          variants={itemVariants}
-        >
-          Giải pháp thiết kế và in ấn định kỳ cho các chuỗi F&B. 
-          Tiết kiệm thời gian, tối ưu chi phí, đồng bộ hình ảnh.
-        </motion.p>
-        <motion.div variants={itemVariants}>
-          <Button>
-            Bắt đầu ngay
-            <ChevronRight className="w-5 h-5 ml-2" />
-          </Button>
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-};
-
-const services = [
-  {
-    icon: <Cake className="w-12 h-12 text-red-600" />,
-    title: 'Thiết Kế Menu & POSM',
-    description: 'Tạo ra các thiết kế menu, poster, standee hấp dẫn, đồng bộ với nhận diện thương hiệu của bạn.',
-  },
-  {
-    icon: <CupSoda className="w-12 h-12 text-red-600" />,
-    title: 'In Ly & Bao Bì',
-    description: 'Cung cấp dịch vụ in logo trên ly, cốc, và các loại bao bì mang đi với chất lượng cao nhất.',
-  },
-  {
-    icon: <Coffee className="w-12 h-12 text-red-600" />,
-    title: 'In Ấn Định Kỳ',
-    description: 'Lên kế hoạch và thực hiện in ấn theo chu kỳ, đảm bảo cửa hàng của bạn luôn sẵn sàng cho mọi chiến dịch.',
-  },
-];
-
-const ServicesSection = () => {
-  return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Dịch vụ của chúng tôi</h2>
-          <p className="text-gray-600 mt-2 max-w-xl mx-auto">PrintZ cung cấp giải pháp in ấn toàn diện cho ngành F&B.</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
-              <Card className="flex flex-col text-center p-8 h-full">
-                <div className="flex justify-center mb-4">{service.icon}</div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{service.title}</h3>
-                <p className="text-gray-600 flex-grow mb-6">{service.description}</p>
-                <Button variant="ghost">
-                  Tìm hiểu thêm <ChevronRight className="w-4 h-4 ml-1" />
-                </Button>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Coffee, CupSoda, Cake } from "lucide-react";
+import { useState } from "react";
 
 const mockupImages = {
-  noel: 'https://placehold.co/800x600/B91C1C/FFFFFF?text=Noel+Campaign',
-  tet: 'https://placehold.co/800x600/FBBF24/000000?text=Tet+Holiday',
-  valentine: 'https://placehold.co/800x600/F472B6/FFFFFF?text=Valentine%27s+Day',
-  summer: 'https://placehold.co/800x600/34D399/FFFFFF?text=Summer+Vibes',
+  noel: "/mockups/tra-sua-noel.png",
+  tet: "/mockups/tra-sua-tet.png",
+  valentine: "/mockups/tra-sua-valentine.png",
+  summer: "/mockups/tra-sua-summer.png",
 };
 
-const mockupTabs = [
-  { id: 'noel', label: 'Giáng Sinh' },
-  { id: 'tet', label: 'Tết' },
-  { id: 'valentine', label: 'Valentine' },
-  { id: 'summer', label: 'Mùa Hè' },
-];
-
-const MockupShowcaseSection = () => {
-  const [activeMockup, setActiveMockup] = useState('noel');
+export default function Home() {
+  const [activeMockup, setActiveMockup] = useState("noel");
 
   return (
-    <section className="py-20">
-      <div className="container mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">Showcase Thiết Kế</h2>
-          <p className="text-gray-600 mt-2">Xem các mẫu thiết kế theo từng chiến dịch của chúng tôi.</p>
-        </div>
-        <div className="flex justify-center flex-wrap gap-2 mb-8">
-          {mockupTabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveMockup(tab.id)}
-              className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 ${
-                activeMockup === tab.id
-                  ? 'bg-red-600 text-white shadow-md'
-                  : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-              }`}
+    <div className="bg-white text-gray-800">
+      {/* Hero Section */}
+      <section className="text-center py-16 bg-gradient-to-b from-red-600 to-red-400 text-white">
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-4xl md:text-5xl font-bold mb-4"
+        >
+          PrintZ – Giải pháp Thiết kế & In ấn Bao bì cho F&B
+        </motion.h1>
+        <p className="text-lg md:text-xl mb-6">
+          Dành riêng cho tiệm bánh, trà sữa và cà phê. Đồng bộ thương hiệu – Đổi mới theo mùa – Tiết kiệm chi phí.
+        </p>
+        <Button className="bg-white text-red-600 font-semibold px-6 py-3 rounded-2xl shadow-lg hover:bg-gray-100">
+          Nhận tư vấn miễn phí
+        </Button>
+      </section>
+
+      {/* 3 dịch vụ chính */}
+      <section className="py-16 px-6 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <Card className="rounded-2xl shadow-lg hover:shadow-xl transition">
+          <CardContent className="text-center p-8">
+            <Cake className="w-14 h-14 text-red-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Bao bì Tiệm Bánh</h3>
+            <p className="mb-4">Hộp quà sang trọng, túi giấy, tem dán lễ hội giúp nâng giá trị sản phẩm.</p>
+            <Button className="bg-red-600 hover:bg-red-700 text-white rounded-xl">Xem chi tiết</Button>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-2xl shadow-lg hover:shadow-xl transition">
+          <CardContent className="text-center p-8">
+            <CupSoda className="w-14 h-14 text-red-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Bao bì Trà Sữa</h3>
+            <p className="mb-4">Ly giấy, túi xách, sticker theo trend – thu hút giới trẻ, dễ viral.</p>
+            <Button className="bg-red-600 hover:bg-red-700 text-white rounded-xl">Xem chi tiết</Button>
+          </CardContent>
+        </Card>
+
+        <Card className="rounded-2xl shadow-lg hover:shadow-xl transition">
+          <CardContent className="text-center p-8">
+            <Coffee className="w-14 h-14 text-red-600 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold mb-2">Bao bì Cà Phê</h3>
+            <p className="mb-4">Ly take-away, túi giấy, bao cà phê hạt đồng bộ – xây dựng thương hiệu chuyên nghiệp.</p>
+            <Button className="bg-red-600 hover:bg-red-700 text-white rounded-xl">Xem chi tiết</Button>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* Mockup showcase */}
+      <section className="py-20 bg-gray-50 text-center px-6">
+        <h2 className="text-3xl font-bold text-red-600 mb-6">Trải nghiệm bao bì Trà Sữa theo mùa</h2>
+        <div className="flex justify-center gap-4 mb-6">
+          {Object.keys(mockupImages).map((key) => (
+            <Button
+              key={key}
+              onClick={() => setActiveMockup(key)}
+              className={`${activeMockup === key ? "bg-red-600 text-white" : "bg-white text-red-600 border"} rounded-xl px-4 py-2`}
             >
-              {tab.label}
-            </button>
+              {key.charAt(0).toUpperCase() + key.slice(1)}
+            </Button>
           ))}
         </div>
-        <div className="relative w-full max-w-4xl mx-auto aspect-[4/3] bg-gray-100 rounded-2xl shadow-inner overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={activeMockup}
-              src={mockupImages[activeMockup]}
-              alt={`${activeMockup} mockup`}
-              initial={{ opacity: 0, y: 30, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -30, scale: 0.95 }}
-              transition={{ duration: 0.5, ease: 'easeInOut' }}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </AnimatePresence>
-        </div>
-      </div>
-    </section>
-  );
-};
+        <motion.img
+          key={activeMockup}
+          src={mockupImages[activeMockup]}
+          alt="Mockup trà sữa"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mx-auto max-h-96 rounded-2xl shadow-lg"
+        />
+      </section>
 
-const WhyChooseUsSection = () => {
-  return (
-    <section className="py-20 bg-gray-50">
-      <div className="container mx-auto px-4 text-center max-w-3xl">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
+      {/* Lời giới thiệu */}
+      <section className="py-20 bg-gray-50 text-center px-6">
+        <motion.h2
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.7 }}
+          className="text-3xl font-bold text-red-600 mb-4"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Tại sao chọn PrintZ?</h2>
-          <p className="text-lg text-gray-600 mb-4">
-            Chúng tôi không chỉ là một xưởng in. PrintZ là đối tác chiến lược, giúp bạn xây dựng hình ảnh thương hiệu F&B một cách <strong className="text-red-600">đồng bộ, chuyên nghiệp và tiết kiệm</strong>.
-          </p>
-          <p className="text-gray-600">
-            Với quy trình thiết kế và in ấn định kỳ, bạn sẽ không còn phải lo lắng về việc chuẩn bị cho các chiến dịch marketing. Chúng tôi lo tất cả, bạn chỉ cần tập trung vào việc kinh doanh.
-          </p>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
+          Vì sao chọn PrintZ?
+        </motion.h2>
+        <p className="max-w-2xl mx-auto text-lg text-gray-600">
+          Chúng tôi mang đến giải pháp thiết kế – in ấn bao bì theo gói định kỳ, luôn mới mẻ theo mùa lễ hội, trend, sự kiện… giúp thương hiệu của bạn nổi bật và tiết kiệm chi phí.
+        </p>
+      </section>
 
-const FinalCtaSection = () => {
-  return (
-    <section className="bg-red-600 text-white">
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Sẵn sàng để đồng bộ hóa thương hiệu của bạn?</h2>
-        <p className="max-w-xl mx-auto mb-8">Hãy để PrintZ giúp bạn tạo ra những ấn phẩm ấn tượng và hiệu quả.</p>
-        <Button variant="primary">
-          Liên hệ tư vấn
-          <ChevronRight className="w-5 h-5 ml-2" />
+      {/* CTA cuối */}
+      <section className="py-16 bg-red-600 text-center text-white">
+        <h2 className="text-3xl font-bold mb-4">Sẵn sàng thay đổi diện mạo thương hiệu của bạn?</h2>
+        <Button className="bg-white text-red-600 font-semibold px-6 py-3 rounded-2xl shadow-lg hover:bg-gray-100">
+          Liên hệ ngay với PrintZ
         </Button>
-      </div>
-    </section>
-  );
-};
-
-const Footer = () => {
-  return (
-    <footer className="bg-gray-800 text-gray-400 py-6">
-        <div className="container mx-auto px-4 text-center text-sm">
-            <p>&copy; {new Date().getFullYear()} PrintZ. All Rights Reserved.</p>
-            <p>Giải pháp in ấn cho ngành F&B.</p>
-        </div>
-    </footer>
-  )
-}
-
-
-// Component chính của App
-// =================================================================
-
-export default function App() {
-  return (
-    <div className="bg-white font-sans antialiased">
-      <main>
-        <HeroSection />
-        <ServicesSection />
-        <MockupShowcaseSection />
-        <WhyChooseUsSection />
-        <FinalCtaSection />
-      </main>
-      <Footer />
+      </section>
     </div>
   );
 }
