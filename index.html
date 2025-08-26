@@ -1,116 +1,191 @@
-import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Coffee, CupSoda, Cake } from "lucide-react";
-import { useState } from "react";
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PrintZ - Thiết kế & In ấn Bao bì F&B</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fff;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 80px 20px;
+      background: linear-gradient(180deg, #dc2626, #ef4444);
+      color: #fff;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    header p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    .btn {
+      background: #fff;
+      color: #dc2626;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #f3f3f3;
+    }
+    .services {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 30px;
+      text-align: center;
+      transition: 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      color: #dc2626;
+    }
+    .showcase {
+      background: #f9fafb;
+      text-align: center;
+      padding: 80px 20px;
+    }
+    .showcase h2 {
+      color: #dc2626;
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    .tabs {
+      margin-bottom: 20px;
+    }
+    .tabs button {
+      border: 1px solid #dc2626;
+      background: #fff;
+      color: #dc2626;
+      padding: 8px 16px;
+      margin: 0 5px;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .tabs button.active, .tabs button:hover {
+      background: #dc2626;
+      color: #fff;
+    }
+    .showcase img {
+      max-height: 300px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: 0.5s;
+    }
+    .why {
+      text-align: center;
+      padding: 60px 20px;
+      background: #f9fafb;
+    }
+    .why h2 {
+      font-size: 2rem;
+      color: #dc2626;
+      margin-bottom: 20px;
+    }
+    .cta {
+      text-align: center;
+      padding: 60px 20px;
+      background: #dc2626;
+      color: #fff;
+    }
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
 
-const mockupImages = {
-  noel: "/mockups/tra-sua-noel.png",
-  tet: "/mockups/tra-sua-tet.png",
-  valentine: "/mockups/tra-sua-valentine.png",
-  summer: "/mockups/tra-sua-summer.png",
-};
+  <!-- Hero -->
+  <header>
+    <h1>PrintZ – Giải pháp Thiết kế & In ấn Bao bì cho F&B</h1>
+    <p>Dành riêng cho tiệm bánh, trà sữa và cà phê.<br/>Đồng bộ thương hiệu – Đổi mới theo mùa – Tiết kiệm chi phí.</p>
+    <a href="#contact" class="btn">Nhận tư vấn miễn phí</a>
+  </header>
 
-export default function Home() {
-  const [activeMockup, setActiveMockup] = useState("noel");
-
-  return (
-    <div className="bg-white text-gray-800">
-      {/* Hero Section */}
-      <section className="text-center py-16 bg-gradient-to-b from-red-600 to-red-400 text-white">
-        <motion.h1
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-4xl md:text-5xl font-bold mb-4"
-        >
-          PrintZ – Giải pháp Thiết kế & In ấn Bao bì cho F&B
-        </motion.h1>
-        <p className="text-lg md:text-xl mb-6">
-          Dành riêng cho tiệm bánh, trà sữa và cà phê. Đồng bộ thương hiệu – Đổi mới theo mùa – Tiết kiệm chi phí.
-        </p>
-        <Button className="bg-white text-red-600 font-semibold px-6 py-3 rounded-2xl shadow-lg hover:bg-gray-100">
-          Nhận tư vấn miễn phí
-        </Button>
-      </section>
-
-      {/* 3 dịch vụ chính */}
-      <section className="py-16 px-6 grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-        <Card className="rounded-2xl shadow-lg hover:shadow-xl transition">
-          <CardContent className="text-center p-8">
-            <Cake className="w-14 h-14 text-red-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Bao bì Tiệm Bánh</h3>
-            <p className="mb-4">Hộp quà sang trọng, túi giấy, tem dán lễ hội giúp nâng giá trị sản phẩm.</p>
-            <Button className="bg-red-600 hover:bg-red-700 text-white rounded-xl">Xem chi tiết</Button>
-          </CardContent>
-        </Card>
-
-        <Card className="rounded-2xl shadow-lg hover:shadow-xl transition">
-          <CardContent className="text-center p-8">
-            <CupSoda className="w-14 h-14 text-red-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Bao bì Trà Sữa</h3>
-            <p className="mb-4">Ly giấy, túi xách, sticker theo trend – thu hút giới trẻ, dễ viral.</p>
-            <Button className="bg-red-600 hover:bg-red-700 text-white rounded-xl">Xem chi tiết</Button>
-          </CardContent>
-        </Card>
-
-        <Card className="rounded-2xl shadow-lg hover:shadow-xl transition">
-          <CardContent className="text-center p-8">
-            <Coffee className="w-14 h-14 text-red-600 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Bao bì Cà Phê</h3>
-            <p className="mb-4">Ly take-away, túi giấy, bao cà phê hạt đồng bộ – xây dựng thương hiệu chuyên nghiệp.</p>
-            <Button className="bg-red-600 hover:bg-red-700 text-white rounded-xl">Xem chi tiết</Button>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* Mockup showcase */}
-      <section className="py-20 bg-gray-50 text-center px-6">
-        <h2 className="text-3xl font-bold text-red-600 mb-6">Trải nghiệm bao bì Trà Sữa theo mùa</h2>
-        <div className="flex justify-center gap-4 mb-6">
-          {Object.keys(mockupImages).map((key) => (
-            <Button
-              key={key}
-              onClick={() => setActiveMockup(key)}
-              className={`${activeMockup === key ? "bg-red-600 text-white" : "bg-white text-red-600 border"} rounded-xl px-4 py-2`}
-            >
-              {key.charAt(0).toUpperCase() + key.slice(1)}
-            </Button>
-          ))}
-        </div>
-        <motion.img
-          key={activeMockup}
-          src={mockupImages[activeMockup]}
-          alt="Mockup trà sữa"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mx-auto max-h-96 rounded-2xl shadow-lg"
-        />
-      </section>
-
-      {/* Lời giới thiệu */}
-      <section className="py-20 bg-gray-50 text-center px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="text-3xl font-bold text-red-600 mb-4"
-        >
-          Vì sao chọn PrintZ?
-        </motion.h2>
-        <p className="max-w-2xl mx-auto text-lg text-gray-600">
-          Chúng tôi mang đến giải pháp thiết kế – in ấn bao bì theo gói định kỳ, luôn mới mẻ theo mùa lễ hội, trend, sự kiện… giúp thương hiệu của bạn nổi bật và tiết kiệm chi phí.
-        </p>
-      </section>
-
-      {/* CTA cuối */}
-      <section className="py-16 bg-red-600 text-center text-white">
-        <h2 className="text-3xl font-bold mb-4">Sẵn sàng thay đổi diện mạo thương hiệu của bạn?</h2>
-        <Button className="bg-white text-red-600 font-semibold px-6 py-3 rounded-2xl shadow-lg hover:bg-gray-100">
-          Liên hệ ngay với PrintZ
-        </Button>
-      </section>
+  <!-- Services -->
+  <section class="services">
+    <div class="card">
+      <h3>🍰 Bao bì Tiệm Bánh</h3>
+      <p>Hộp quà sang trọng, túi giấy, tem dán lễ hội giúp nâng giá trị sản phẩm.</p>
+      <a href="#" class="btn">Xem chi tiết</a>
     </div>
-  );
-}
+    <div class="card">
+      <h3>🥤 Bao bì Trà Sữa</h3>
+      <p>Ly giấy, túi xách, sticker theo trend – thu hút giới trẻ, dễ viral.</p>
+      <a href="#" class="btn">Xem chi tiết</a>
+    </div>
+    <div class="card">
+      <h3>☕ Bao bì Cà Phê</h3>
+      <p>Ly take-away, túi giấy, bao cà phê hạt đồng bộ – xây dựng thương hiệu chuyên nghiệp.</p>
+      <a href="#" class="btn">Xem chi tiết</a>
+    </div>
+  </section>
+
+  <!-- Showcase -->
+  <section class="showcase">
+    <h2>Trải nghiệm bao bì Trà Sữa theo mùa</h2>
+    <div class="tabs">
+      <button class="tab-btn active" data-img="noel">Noel</button>
+      <button class="tab-btn" data-img="tet">Tết</button>
+      <button class="tab-btn" data-img="valentine">Valentine</button>
+      <button class="tab-btn" data-img="summer">Summer</button>
+    </div>
+    <img id="mockup" src="https://via.placeholder.com/400x300?text=Noel+Mockup" alt="Mockup trà sữa"/>
+  </section>
+
+  <!-- Why -->
+  <section class="why">
+    <h2>Vì sao chọn PrintZ?</h2>
+    <p>Chúng tôi mang đến giải pháp thiết kế – in ấn bao bì theo gói định kỳ, luôn mới mẻ theo mùa lễ hội, trend, sự kiện…<br/>Giúp thương hiệu của bạn nổi bật và tiết kiệm chi phí.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <h2>Sẵn sàng thay đổi diện mạo thương hiệu của bạn?</h2>
+    <a href="#" class="btn">Liên hệ ngay với PrintZ</a>
+  </section>
+
+  <script>
+    const mockup = document.getElementById('mockup');
+    const buttons = document.querySelectorAll('.tab-btn');
+    const images = {
+      noel: "https://via.placeholder.com/400x300?text=Noel+Mockup",
+      tet: "https://via.placeholder.com/400x300?text=Tet+Mockup",
+      valentine: "https://via.placeholder.com/400x300?text=Valentine+Mockup",
+      summer: "https://via.placeholder.com/400x300?text=Summer+Mockup"
+    };
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        mockup.src = images[btn.dataset.img];
+      });
+    });
+  </script>
+</body>
+</html>
