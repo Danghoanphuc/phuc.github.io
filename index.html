@@ -2,191 +2,180 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>PrintZ – Nền tảng Quản lý & Triển khai Thương hiệu F&B</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrintZ – Nền tảng Quản lý & Triển khai Thương hiệu F&B</title>
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       background: #fff;
       color: #333;
     }
     header {
       background: #dc2626;
-      color: white;
-      padding: 20px;
-      text-align: center;
+      color: #fff;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     header h1 {
+      font-size: 1.4rem;
       margin: 0;
-      font-size: 2rem;
     }
-    nav {
-      margin-top: 10px;
-    }
-    nav a {
-      color: white;
-      margin: 0 15px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    /* Hero section với video */
-    .hero {
-      position: relative;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    .hero-video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      z-index: -1;
-    }
-    .hero-content {
+    header nav a {
       color: #fff;
-      z-index: 1;
-      max-width: 700px;
-      padding: 20px;
-      background: rgba(220, 38, 38, 0.6);
-      border-radius: 12px;
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: 500;
     }
-    .hero-content h2 {
+    .hero {
+      text-align: center;
+      padding: 80px 20px;
+      background: #fef2f2;
+    }
+    .hero h2 {
       font-size: 2rem;
+      color: #dc2626;
       margin-bottom: 15px;
     }
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
     .btn {
-      background: #fff;
-      color: #dc2626;
+      display: inline-block;
+      margin-top: 20px;
       padding: 12px 24px;
+      background: #dc2626;
+      color: #fff;
+      border-radius: 8px;
       text-decoration: none;
-      border-radius: 6px;
       font-weight: bold;
       transition: 0.3s;
     }
     .btn:hover {
-      background: #fca5a5;
-      color: #fff;
+      background: #b91c1c;
     }
-    /* Dịch vụ */
-    .services {
+    .section {
       padding: 60px 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .section h2 {
+      color: #dc2626;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
       text-align: center;
     }
-    .services h3 {
-      font-size: 1.8rem;
-      margin-bottom: 40px;
-      color: #dc2626;
-    }
-    .service-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .service {
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      background: #fff;
-      transition: 0.3s;
-    }
-    .service:hover {
-      transform: translateY(-5px);
-    }
-    .service h4 {
+    .card h3 {
       color: #dc2626;
       margin-bottom: 10px;
     }
-    /* Showcase mockup */
-    .showcase {
-      padding: 60px 20px;
-      background: #fef2f2;
-      text-align: center;
-    }
-    .showcase h3 {
-      color: #dc2626;
-      margin-bottom: 20px;
-    }
-    .showcase iframe {
+    iframe, img {
+      width: 100%;
       border: none;
-      width: 500px;
-      height: 500px;
-      max-width: 100%;
       border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      margin-top: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-    /* Footer */
     footer {
-      background: #dc2626;
-      color: white;
       text-align: center;
-      padding: 20px;
+      padding: 30px;
+      background: #f3f4f6;
+      color: #555;
     }
   </style>
 </head>
 <body>
-
+  <!-- Header -->
   <header>
     <h1>PrintZ</h1>
-    <p>Nền tảng Quản lý & Triển khai Thương hiệu F&B</p>
     <nav>
-      <a href="#services">Dịch vụ</a>
-      <a href="#showcase">Mockup</a>
+      <a href="#solutions">Giải pháp</a>
+      <a href="#demo">Demo</a>
+      <a href="#process">Quy trình</a>
       <a href="#contact">Liên hệ</a>
     </nav>
   </header>
 
-  <!-- Hero section -->
+  <!-- Hero -->
   <section class="hero">
-    <video autoplay muted loop playsinline class="hero-video">
-      <source src="./video-logo-present.mp4" type="video/mp4">
-      Trình duyệt của bạn không hỗ trợ video.
-    </video>
-    <div class="hero-content">
-      <h2>Nâng tầm thương hiệu F&B của bạn</h2>
-      <p>PrintZ giúp tiệm cà phê, tiệm bánh và trà sữa luôn bắt trend với bao bì, chiến dịch và decor sự kiện – đồng bộ, nhanh chóng, tiết kiệm chi phí.</p>
-      <a href="#contact" class="btn">Trải nghiệm ngay</a>
-    </div>
+    <h2>Nền tảng Quản lý & Triển khai Thương hiệu F&B</h2>
+    <p>PrintZ giúp tiệm cà phê, tiệm bánh và trà sữa luôn bắt trend với bao bì, chiến dịch và decor sự kiện – đồng bộ, nhanh chóng, tiết kiệm chi phí.</p>
+    <a href="#contact" class="btn">Trải nghiệm ngay</a>
   </section>
 
-  <!-- Dịch vụ -->
-  <section id="services" class="services">
-    <h3>Dịch vụ nổi bật</h3>
-    <div class="service-grid">
-      <div class="service">
-        <h4>Tiệm Cà Phê</h4>
-        <p>Thiết kế bao bì, ly, túi mang đi đồng bộ với concept quán. Luôn có bộ nhận diện mới theo mùa.</p>
+  <!-- Giải pháp -->
+  <section class="section" id="solutions">
+    <h2>Giải pháp cho từng mô hình F&B</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Tiệm Cà Phê</h3>
+        <p>Ly cà phê mang đi, túi giấy, bao bì seasonal thiết kế đồng bộ với thương hiệu.</p>
       </div>
-      <div class="service">
-        <h4>Tiệm Bánh</h4>
-        <p>Hộp bánh, túi xách và decor cửa hàng theo sự kiện. Giúp thương hiệu luôn sống động.</p>
+      <div class="card">
+        <h3>Tiệm Bánh</h3>
+        <p>Hộp bánh, nhãn dán, túi xách thay đổi theo mùa lễ hội, tạo trải nghiệm khách hàng mới lạ.</p>
       </div>
-      <div class="service">
-        <h4>Trà Sữa</h4>
-        <p>Đổi mới mẫu ly, seal, phụ kiện theo trend. Giúp thương hiệu gần gũi giới trẻ hơn.</p>
+      <div class="card">
+        <h3>Tiệm Trà Sữa</h3>
+        <p>Mockup bao bì dynamic, luôn cập nhật xu hướng và sự kiện đặc biệt.</p>
       </div>
     </div>
   </section>
 
-  <!-- Showcase -->
-  <section id="showcase" class="showcase">
-    <h3>Demo Mockup Bao Bì</h3>
-    <p>Khách hàng có thể xem trước bao bì được đổi mới theo mùa, sự kiện.</p>
-    <iframe title="Mockup trà sữa" allowfullscreen src="https://www.pacdora.com/share?filter_url=psj7a72i7h"></iframe>
+  <!-- Demo -->
+  <section class="section" id="demo">
+    <h2>Demo Mockup Bao Bì</h2>
+    <iframe title="Mockup trà sữa" allowfullscreen src="https://www.pacdora.com/share?filter_url=psj7a72i7h" height="500"></iframe>
+  </section>
+
+  <!-- Process -->
+  <section class="section" id="process">
+    <h2>Quy trình triển khai PrintZ</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1. Thiết kế</h3>
+        <p>Đội ngũ sáng tạo thiết kế bao bì & campaign đồng bộ thương hiệu.</p>
+      </div>
+      <div class="card">
+        <h3>2. In ấn</h3>
+        <p>Đảm bảo chất lượng, tối ưu chi phí và tốc độ.</p>
+      </div>
+      <div class="card">
+        <h3>3. Campaign</h3>
+        <p>Quản lý lịch trình sự kiện, bao bì theo mùa & chiến dịch marketing.</p>
+      </div>
+      <div class="card">
+        <h3>4. Decor</h3>
+        <p>Đề xuất trang trí cửa hàng theo mùa lễ hội, tạo sự khác biệt.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section" id="contact">
+    <h2>Liên hệ PrintZ</h2>
+    <p style="text-align:center;">Địa chỉ: Hà Nội, Việt Nam<br>Email: contact@printz.vn<br>Hotline: 0123 456 789</p>
+    <p style="text-align:center;"><a class="btn" href="mailto:contact@printz.vn">Gửi yêu cầu</a></p>
   </section>
 
   <!-- Footer -->
-  <footer id="contact">
-    <p>Liên hệ: contact@printz.vn | © 2025 PrintZ</p>
+  <footer>
+    <p>© 2025 PrintZ – Nền tảng Quản lý & Triển khai Thương hiệu F&B</p>
   </footer>
-
 </body>
 </html>
